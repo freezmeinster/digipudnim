@@ -1,31 +1,26 @@
 import prologue
 import json
-import utils/host
+import std/with
+import views/dashboard
+import views/vm
 
 from prologue/openapi import serveDocs
 
-proc dashboard*(ctx: Context) {.async.} =
-    var res = %*
-      {
-        "total_cpu": getHostCpu(),
-        "total_memory": getHostMemory(),
-        "available_memory": getHostAvailMemory(),
-        "vm_path": getHostVmPath(),
-
-      }
-    resp jsonResponse(res)
 
 let
   env = loadPrologueEnv(".env")
-  settings = newSettings(appName = env.getOrDefault("appName", "Prologue"),
+  settings = newSettings(appName = env.getOrDefault("appName", "Digipud"),
                          debug = env.getOrDefault("debug", true),
                          address = env.getOrDefault("address", ""),
-                         port = Port(env.getOrDefault("port", 8080)),
+                         port = Port(env.getOrDefault("port", 2107)),
                          secretKey = env.getOrDefault("secretKey", "nguk")
     )
+  app = newApp(settings=settings)
+  vm_route = newGroup(app, "/vm", @[])
 
+with vm_route:
+  get("/", vm.my)
 
-let app = newApp(settings=settings)
-app.get("/", dashboard)
+app.get("/", dashboard.index)
 app.serveDocs("docs/openapi.json")
 app.run()

@@ -1,36 +1,66 @@
-{
-  "openapi": "3.0.2",
+ {
+  "openapi": "3.0.3",
   "info": {
-    "title": "Digital Puddle API",
-    "description": "Digital Puddle is portable self made Digital Ocean Clone Wannabe",
+    "title": "Digipud API",
+    "version": "0.0.1",
+    "description": "Digital Puddle is portable self made Digital Ocean Clone",
     "termsOfService": "",
-    "contact": {
-      "name": "",
-      "url": "",
-      "email": ""
-    },
-    "license": {
-      "name": "NGUK",
-      "url": "https://mula.cloud/license.txt"
-    },
-    "version": "0.0.1"
+    "x-logo": {
+      "url": ""
+    }
   },
+  "servers": [
+    {
+      "url": "http://vmhost.vm:2107",
+      "description": "",
+      "variables": {},
+      "x-last-modified": 1627759672571
+    }
+  ],
   "paths": {
     "/": {
+      "summary": "dashboard",
+      "description": "Dashboard",
       "get": {
-        "summary": "Root",
-        "operationId": "root__get",
+        "tags": [],
+        "operationId": "dashboard_get",
         "responses": {
-          "200": {
-            "description": "Successful Response",
+          "Dashboard Response": {
+            "description": "asd",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "type": "integer",
+                  "format": null,
+                  "pattern": "",
+                  "enum": null,
+                  "description": "",
+                  "example": "",
+                  "externalDocs": {
+                    "url": "",
+                    "description": ""
+                  }
+                },
+                "encoding": "",
+                "example": ""
               }
-            }
+            },
+            "x-last-modified": 1627759878307,
+            "headers": {},
+            "links": {}
           }
         }
-      }
+      },
+      "x-last-modified": 1627759789543
     }
-  }
-}
+  },
+  "components": {
+    "securitySchemes": {},
+    "schemas": {},
+    "headers": {},
+    "responses": {},
+    "parameters": {}
+  },
+  "tags": [],
+  "security": []
+} 
