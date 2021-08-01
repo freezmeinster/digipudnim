@@ -1,4 +1,5 @@
 import common
+import zfs
 import strutils
 
 proc getHostMemory*(): int = 
@@ -22,3 +23,5 @@ proc getHostVmPath*(): string =
       return getZFSPropertyStr(dataset, "mountpoint")
   else:
     return ""
+
+
