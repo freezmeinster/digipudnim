@@ -12,6 +12,11 @@ proc index*(ctx: Context) {.async.} =
     var res = %*
       {
         "total_cpu": getHostCpu(),
+        "vm": {
+          "total": 12,
+          "running": 4,
+          "off": 9,
+        },
         "memory": {
           "total_int": total_mem,
           "available_int": avail_mem,

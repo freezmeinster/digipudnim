@@ -7,7 +7,11 @@ from prologue/openapi import serveDocs
 import views/dashboard
 import views/vm
 
+proc ctrlc() {.noconv.} =
+    echo "Force close"
+    quit()
 
+setControlCHook(ctrlc)
 
 let
   env = loadPrologueEnv(".env")
@@ -25,7 +29,7 @@ var
 with vm_route:
   get("/", vm.my)
 
-app.use(staticFileMiddleware(env.getOrDefault("staticDir", "static/")))
+app.use(staticFileMiddleware(env.getOrDefault("staticDir", "static")))
 app.get("/", dashboard.home)
 app.get("/dashboard", dashboard.index)
 app.serveDocs("docs/openapi.json")
