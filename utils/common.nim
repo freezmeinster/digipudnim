@@ -4,7 +4,7 @@ import strutils
 import tables
 
 proc getSysctlInt*(key: string): int =
-  let output = string(execProcess(fmt"sysctl -n {key}"))
+  let output = execProcess(fmt"sysctl -n {key}")
   return parseInt(strip(output))
 
 proc getRcConfItem*(key: string): string =

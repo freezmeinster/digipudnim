@@ -3,7 +3,7 @@ import strformat
 import strutils
 
 proc getZFSProperty(dataset: string, prop: string): string = 
-  var output = execProcess(fmt"zfs get -H -o value {prop} {dataset}").string
+  var output = execProcess(fmt"zfs get -H -o value {prop} {dataset}")
   stripLineEnd(output)
   return output
 
