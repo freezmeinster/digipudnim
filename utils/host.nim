@@ -17,9 +17,9 @@ proc getHostCpu*(): int =
 
 proc getHostVmPath*(): string =
   if getRcConfItem("vm_enable").toLowerAscii().contains("yes"):
-    let vm_dir = getRcConfItem("vm_dir")
-    if vm_dir.contains("zfs"):
-      let dataset = vm_dir.split(":")[1]
+    let vmDir = getRcConfItem("vm_dir")
+    if vmDir.contains("zfs"):
+      let dataset = vmDir.split(":")[1]
       return getZFSPropertyStr(dataset, "mountpoint")
   else:
     return ""

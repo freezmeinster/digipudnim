@@ -7,10 +7,11 @@ proc getSysctlInt*(key: string): int =
   let output = execProcess(fmt"sysctl -n {key}")
   return parseInt(strip(output))
 
-proc getRcConfItem*(key: string): string =
+proc getConfig*(path: string): Table[string, string] = 
   let 
-    rcconf = open("/etc/rc.conf")
-    conf = newTable[string, string]()
+    rcconf = open(path)
+  var
+    conf = initTable[string, string]()
 
   defer: rcconf.close()
   for ctn in rcconf.lines:
@@ -18,5 +19,9 @@ proc getRcConfItem*(key: string): string =
       let cot = ctn.split("=")
       if len(cot) == 2:
         conf[cot[0]] = cot[1].replace("\"", "")
+  return conf
 
+
+proc getRcConfItem*(key: string): string =
+  let conf = getConfig("/etc/rc.conf")
   return conf.getOrDefault(key, "")

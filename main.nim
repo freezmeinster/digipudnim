@@ -1,4 +1,3 @@
-import json
 import std/with
 import prologue
 from prologue/middlewares/staticfile import staticFileMiddleware
@@ -24,10 +23,12 @@ let
 
 var 
   app = newApp(settings=settings)
-  vm_route = newGroup(app, "/vm", @[])
+  vmRoute = newGroup(app, "/vm", @[])
 
-with vm_route:
+with vmRoute:
   get("/", vm.my)
+  get("/{name}", vm.detail)
+  get("/{name}/start", vm.start)
 
 app.use(staticFileMiddleware(env.getOrDefault("staticDir", "static")))
 app.get("/", dashboard.home)

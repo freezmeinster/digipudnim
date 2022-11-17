@@ -7,8 +7,8 @@ proc home*(ctx: Context) {.async.} =
 
 
 proc index*(ctx: Context) {.async.} =
-    let total_mem = getHostMemory()
-    let avail_mem = getHostAvailMemory()
+    let totalMem = getHostMemory()
+    let availMem = getHostAvailMemory()
     var res = %*
       {
         "total_cpu": getHostCpu(),
@@ -18,11 +18,11 @@ proc index*(ctx: Context) {.async.} =
           "off": 9,
         },
         "memory": {
-          "total_int": total_mem,
-          "available_int": avail_mem,
-          "total_str": total_mem.formatSize(),
-          "available_str": avail_mem.formatSize(),
-          "percent": ((avail_mem / total_mem ) * 100).int
+          "total_int": totalMem,
+          "available_int": availMem,
+          "total_str": totalMem.formatSize(),
+          "available_str": availMem.formatSize(),
+          "percent": ((availMem / totalMem ) * 100).int
         },
         "vm_path": getHostVmPath(),
 
